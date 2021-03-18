@@ -1,0 +1,41 @@
+{
+    "calls": [
+        {
+            "uri": "https://jsonplaceholder.typicode.com/users",
+            "method":"GET",
+            "mapDictionary": {
+                "id": "id",
+                "name": "nome",
+                "username": "utente",
+                "email": "email"
+            }
+        },        
+        {
+            "uri": "https://jsonplaceholder.typicode.com/users",
+            "method":"POST",
+            "body": {
+                "id": 11001,
+                "name": "Leo Mat",
+                "username": "leomat",
+                "email": "leo@mat.biz",
+                "address": {
+                  "street": "Julat Light",
+                  "suite": "Apt. 556",
+                  "city": "Gwenborough",
+                  "zipcode": "92998-3874",
+                  "geo": {
+                    "lat": "46.3159",
+                    "lng": "11.1496"
+                  }
+                },
+                "phone": "1-130-736-5331 x56442",
+                "website": "hildegard.org",
+                "company": {
+                  "name": "Romaguera-Crona",
+                  "catchPhrase": "Multi-layered client-server neural-net",
+                  "bs": "harness real-time e-markets"
+                }
+            }
+        }
+    ]
+}
