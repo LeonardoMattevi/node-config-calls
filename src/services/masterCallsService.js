@@ -1,19 +1,16 @@
 
 const axios = require('axios');
 const { calls } = require('../core/config/configuredCalls.json');
+const { getTranslatedObj } = require('../core/mapEntity');
 const dbContext = require('../store/dbContext');
 
 function mapResponse(call, arrData) {
   if (!call.mapDictionary) {
     return arrData;
   }
-  return arrData.map((item, index) => {
-    const obj = {};
-
-    for (const prop in call.mapDictionary) {
-      obj[call.mapDictionary[prop]] = item[prop];
-    }
-    obj.creationDate = Date.now();
+  return arrData.map((item) => {
+    const obj = getTranslatedObj(item, call.mapDictionary)
+    obj.creationDate = new Date();
     return obj;
   });
 }
@@ -23,7 +20,7 @@ function manageCallPromise(call, promise) {
     console.log(`${call.method} ${call.uri}`, 'done!');
     const arrData = !response.data ? [] : Array.isArray(response.data) ? response.data : [response.data];
     const mappedData = mapResponse(call, arrData);
-
+    
     dbContext.Item.insertMany(mappedData).then(function () {
       console.log('Data inserted'); // Success
     });
